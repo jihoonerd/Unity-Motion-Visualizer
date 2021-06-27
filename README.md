@@ -1,5 +1,7 @@
 # Unity-Motion-Visualizer
 
+Kinematic chain is targeted for [LAFAN1](https://github.com/ubisoft/ubisoft-laforge-animation-dataset) dataset.
+
 ## Demo
 
 |||
