@@ -11,10 +11,13 @@ public class MotionController : MonoBehaviour
     public GameObject referenceModel;
     GameObject startModel;
     GameObject targetModel;
+    GameObject stopoverModel;
 
     RigStructure rig = new RigStructure();
     RigStructure startRig = new RigStructure();
     RigStructure targetRig = new RigStructure();
+    RigStructure stopoverRig = new RigStructure();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +27,14 @@ public class MotionController : MonoBehaviour
         startModel.name += "_start";
         targetModel = Instantiate(referenceModel);
         targetModel.name += "_target";
+        stopoverModel = Instantiate(referenceModel);
+        stopoverModel.name += "_stopover";
+
 
         rig = LinkRigStructure(gameObject, rig);
         startRig = LinkRigStructure(startModel, startRig);
         targetRig = LinkRigStructure(targetModel, targetRig);
+        stopoverRig = LinkRigStructure(stopoverModel, stopoverRig);
 
         SetStartTargetPose();
         StartCoroutine(RunMotion());
@@ -38,7 +45,7 @@ public class MotionController : MonoBehaviour
         // yield return new WaitForSeconds(1.0f);
         while(dataReader.GetCurIndex() < dataReader.numFiles)
         {
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.1f);
             MotionData motionData = dataReader.GetMotionData();
             SetPose(motionData, rig);
         }
@@ -57,9 +64,14 @@ public class MotionController : MonoBehaviour
         MotionData startData = dataReader.GetStartData();
         SetPose(startData, startRig);
         startModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.97f, 0.33f, 0.43f, 1.0f));
+
         MotionData targetData = dataReader.GetTargetData();
         SetPose(targetData, targetRig);
         targetModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.3f, 0.5f, 1.0f, 1.0f));
+
+        MotionData stopoverData = dataReader.GetStopoverData();
+        SetPose(stopoverData, stopoverRig);
+        stopoverModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.3f, 0.5f, 1.0f, 0.0f));
     }
 
     void SetPose(MotionData motionData, RigStructure rig)
