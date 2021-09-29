@@ -71,7 +71,7 @@ public class MotionController : MonoBehaviour
 
         MotionData stopoverData = dataReader.GetStopoverData();
         SetPose(stopoverData, stopoverRig);
-        stopoverModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.3f, 0.5f, 1.0f, 0.0f));
+        stopoverModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.3f, 0.5f, 1.0f, 1.0f));
     }
 
     void SetPose(MotionData motionData, RigStructure rig)
