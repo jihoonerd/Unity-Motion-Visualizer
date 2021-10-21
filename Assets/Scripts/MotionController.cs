@@ -13,6 +13,8 @@ public class MotionController : MonoBehaviour
     GameObject targetModel;
     GameObject stopoverModel;
 
+    public bool stopover;
+
     RigStructure rig = new RigStructure();
     RigStructure startRig = new RigStructure();
     RigStructure targetRig = new RigStructure();
@@ -34,7 +36,10 @@ public class MotionController : MonoBehaviour
         rig = LinkRigStructure(gameObject, rig);
         startRig = LinkRigStructure(startModel, startRig);
         targetRig = LinkRigStructure(targetModel, targetRig);
-        stopoverRig = LinkRigStructure(stopoverModel, stopoverRig);
+
+        if (stopover){
+            stopoverRig = LinkRigStructure(stopoverModel, stopoverRig);
+        }
 
         SetStartTargetPose();
         StartCoroutine(RunMotion());
@@ -69,9 +74,11 @@ public class MotionController : MonoBehaviour
         SetPose(targetData, targetRig);
         targetModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.3f, 0.5f, 1.0f, 1.0f));
 
-        MotionData stopoverData = dataReader.GetStopoverData();
-        SetPose(stopoverData, stopoverRig);
-        stopoverModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.3f, 0.5f, 1.0f, 1.0f));
+        if (stopover){
+            MotionData stopoverData = dataReader.GetStopoverData();
+            SetPose(stopoverData, stopoverRig);
+            stopoverModel.GetComponentInChildren<Renderer>().material.SetColor("_Color", new Color(0.97f, 0.33f, 0.43f, 1.0f));
+        }
     }
 
     void SetPose(MotionData motionData, RigStructure rig)
