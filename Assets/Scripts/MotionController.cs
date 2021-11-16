@@ -8,14 +8,16 @@ public class MotionController : MonoBehaviour
     public int translationScaling = 100;
     JSONReader dataReader;
     Vector3 initPos;
-    public GameObject referenceModel;
+    GameObject referenceModel;
+
+    GameObject rigModel;
     GameObject startModel;
     GameObject targetModel;
     GameObject stopoverModel;
 
     public bool stopover;
 
-    RigStructure rig = new RigStructure();
+    RigStructure baseRig = new RigStructure();
     RigStructure startRig = new RigStructure();
     RigStructure targetRig = new RigStructure();
     RigStructure stopoverRig = new RigStructure();
@@ -23,24 +25,29 @@ public class MotionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject referenceModel = transform.Find("model_skeleton").gameObject;
         dataReader = new JSONReader(dataPath);
         initPos = gameObject.transform.position;
+
+        rigModel = Instantiate(referenceModel);
+        rigModel.name += "_base";
         startModel = Instantiate(referenceModel);
         startModel.name += "_start";
         targetModel = Instantiate(referenceModel);
         targetModel.name += "_target";
-        stopoverModel = Instantiate(referenceModel);
-        stopoverModel.name += "_stopover";
 
-
-        rig = LinkRigStructure(gameObject, rig);
+        baseRig = LinkRigStructure(rigModel, baseRig);
         startRig = LinkRigStructure(startModel, startRig);
         targetRig = LinkRigStructure(targetModel, targetRig);
 
         if (stopover){
+            stopoverModel = Instantiate(referenceModel);
+            stopoverModel.name += "_stopover";
             stopoverRig = LinkRigStructure(stopoverModel, stopoverRig);
         }
 
+        referenceModel.SetActive(false);
+        
         SetStartTargetPose();
         StartCoroutine(RunMotion());
     }
@@ -50,9 +57,9 @@ public class MotionController : MonoBehaviour
         // yield return new WaitForSeconds(1.0f);
         while(dataReader.GetCurIndex() < dataReader.numFiles)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             MotionData motionData = dataReader.GetMotionData();
-            SetPose(motionData, rig);
+            SetPose(motionData, baseRig);
         }
     }
 
