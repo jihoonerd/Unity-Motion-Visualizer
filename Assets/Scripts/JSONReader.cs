@@ -68,6 +68,12 @@ public class JSONReader
         return jsonData;
     }
 
+    public MotionData GetMotionData(int timestep)
+    {
+        MotionData jsonData = ParseJSON(fileNames[timestep]);
+        return jsonData;
+    }
+
     public int GetCurIndex()
     {
         return curIndex;
