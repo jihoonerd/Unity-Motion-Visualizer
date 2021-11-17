@@ -19,6 +19,10 @@ public class MotionTrajectoryViewer : MonoBehaviour
     RigStructure targetRig = new RigStructure();
     RigStructure stopoverRig = new RigStructure();
 
+    public Color startColor = Color.red;
+    public Color targetColor = Color.blue;
+    public Color stopoverColor = Color.green;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +32,10 @@ public class MotionTrajectoryViewer : MonoBehaviour
 
         startModel = Instantiate(referenceModel);
         startModel.name += "_start";
+        startModel.GetComponentInChildren<SkinnedMeshRenderer>().materials[3].SetColor("_Color", startColor);
         targetModel = Instantiate(referenceModel);
         targetModel.name += "_target";
+        targetModel.GetComponentInChildren<SkinnedMeshRenderer>().materials[3].SetColor("_Color", targetColor);
         
 
         startRig = LinkRigStructure(startModel, startRig);
@@ -40,6 +46,7 @@ public class MotionTrajectoryViewer : MonoBehaviour
             stopoverModel = Instantiate(referenceModel);
             stopoverModel.name += "_stopover";
             stopoverRig = LinkRigStructure(stopoverModel, stopoverRig);
+            stopoverModel.GetComponentInChildren<SkinnedMeshRenderer>().materials[3].SetColor("_Color", stopoverColor);
         }
 
         SetStartTargetPose();
