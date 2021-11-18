@@ -1,5 +1,7 @@
 # Unity-Motion-Visualizer
 
+Tested on Unity 2020.3.18
+
 Kinematic chain is targeted for [LAFAN1](https://github.com/ubisoft/ubisoft-laforge-animation-dataset) dataset.
 
 ## Demo
