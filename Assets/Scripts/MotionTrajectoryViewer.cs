@@ -22,6 +22,7 @@ public class MotionTrajectoryViewer : MonoBehaviour
     public Color startColor = Color.red;
     public Color targetColor = Color.blue;
     public Color stopoverColor = Color.green;
+    public Color trajColor = Color.grey;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,7 @@ public class MotionTrajectoryViewer : MonoBehaviour
             RigStructure trajRig = new RigStructure();
             GameObject rigModel = Instantiate(referenceModel);
             trajRig = LinkRigStructure(rigModel, trajRig);
+            rigModel.GetComponentInChildren<SkinnedMeshRenderer>().materials[3].SetColor("_Color", trajColor);
 
             MotionData data = dataReader.GetMotionData(i);
             SetPose(data, trajRig);   
