@@ -6,6 +6,7 @@ public class MotionController : MonoBehaviour
 {
     public string dataPath;
     public int translationScaling = 100;
+    public float frameInterval = 0.05f;
     JSONReader dataReader;
     Vector3 initPos;
     GameObject referenceModel;
@@ -70,7 +71,7 @@ public class MotionController : MonoBehaviour
         // yield return new WaitForSeconds(1.0f);
         while(dataReader.GetCurIndex() < dataReader.numFiles)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(frameInterval);
             MotionData motionData = dataReader.GetMotionData();
             SetPose(motionData, baseRig);
         }
