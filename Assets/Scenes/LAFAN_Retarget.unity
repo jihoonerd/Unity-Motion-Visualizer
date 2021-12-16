@@ -454,13 +454,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.12861882, y: -0, z: -0, w: 0.99169415}
-  m_LocalPosition: {x: 0.4, y: 2.31, z: -4.11}
+  m_LocalRotation: {x: 0.14560696, y: -0.26702416, z: 0.039905135, w: 0.95179015}
+  m_LocalPosition: {x: 1.879, y: 2.336, z: -2.509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 14.78, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.367, y: -31.359, z: -0.108}
 --- !u!1001 &1025745249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 1585278212}
   - component: {fileID: 1585278211}
   m_Layer: 0
-  m_Name: Skeleton3
+  m_Name: motion_trajectory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -822,11 +822,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba458c40356c2574c889bbe8db30065c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataPath: Assets/SampleData/dance/test_100/pred_json
+  dataPath: Assets/SampleData/walk_950/pred_json
   translationScaling: 100
-  interval: 10
+  interval: 20
   stopover: 0
-  startColor: {r: 1, g: 0.68235296, b: 0.015686275, a: 1}
+  startColor: {r: 1, g: 0.27058825, b: 0.27058825, a: 1}
   targetColor: {r: 0.37254903, g: 0.37254903, b: 1, a: 1}
   stopoverColor: {r: 0, g: 1, b: 0, a: 1}
   trajColor: {r: 0.33333334, g: 0.32941177, b: 0.40392157, a: 1}
@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 1783065883}
   - component: {fileID: 1783065882}
   m_Layer: 0
-  m_Name: Skeleton1
+  m_Name: motion_character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,9 +1092,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd77febd143b9c61ae420b3766cad14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataPath: Assets/SampleData/walk/test_100/pred_json
+  dataPath: Assets/SampleData/test_950/pred_json
   translationScaling: 100
-  frameInterval: 0.06
+  frameInterval: 0.05
   stopover: 0
   startColor: {r: 1, g: 0.2688679, b: 0.2688679, a: 1}
   targetColor: {r: 0.3726415, g: 0.3726415, b: 1, a: 1}
